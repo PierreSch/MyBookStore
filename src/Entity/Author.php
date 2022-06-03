@@ -10,6 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=AuthorRepository::class)
+ * @ORM\HasLifecycleCallbacks()
  */
 class Author
 {
@@ -84,7 +85,9 @@ class Author
     {
         return $this->fullname;
     }
-
+    /**
+     * @ORM\PrePersist
+     */
     public function setFullname(): self
     {
         $this->fullname = $this->firstname;
